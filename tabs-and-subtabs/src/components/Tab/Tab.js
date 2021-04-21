@@ -1,32 +1,51 @@
-import { useState, useEffect } from 'react';
-import Subtab from './../Subtab/Subtab'
-import './Tab.scss';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
-const Tab = (props) => {
-  const anchorClass = props.active ? 'active' : 'inactive';
-  const [activeSubtab, setActiveSubtab] = useState(1);
+import PropTypes from 'prop-types'
+import { useState, useEffect } from 'react'
+
+import Subtab from '../Subtab/Subtab'
+import './Tab.scss'
+
+const Tab = ({ id, active, clickHandler, name, subtabs }) => {
+  const displayClass = active ? 'active' : 'inactive'
+  const [activeSubtab, setActiveSubtab] = useState(1)
 
   // To reset the selected subtab everytime a tab is changed
   useEffect(() => {
     setActiveSubtab(1)
-  }, [props.active]);
+  }, [active])
 
   return (
     <div>
-      <a className={ anchorClass } onClick={ props.clickHandler }>
-        { props.name }
+      <a className={displayClass} onClick={() => clickHandler(id)}>
+        {name}
       </a>
       <ul>
-      { props.active && props.subtabs && props.subtabs.map(function(subtabData, index) {
-        return (
-          <li key={ subtabData.id }>
-            <Subtab name={ subtabData.name } content={subtabData.content} clickHandler={() => { setActiveSubtab(subtabData.id) } } active={ activeSubtab === subtabData.id } />
-          </li>
-        );
-      }) }
-    </ul>   
-  </div>
+        {active &&
+          subtabs?.map(({ id: subtabId, name: subtabName, content }) => (
+            <li key={subtabId}>
+              <Subtab
+                id={subtabId}
+                name={subtabName}
+                content={content}
+                clickHandler={setActiveSubtab}
+                active={activeSubtab === subtabId}
+              />
+            </li>
+          ))}
+      </ul>
+    </div>
   )
 }
 
-export default Tab;
+Tab.propTypes = {
+  id: PropTypes.number.isRequired,
+  active: PropTypes.bool.isRequired,
+  clickHandler: PropTypes.func.isRequired,
+  subtabs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  name: PropTypes.string.isRequired,
+}
+
+export default Tab
