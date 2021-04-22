@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <ul className="navigation-list">
       {headerData?.tabs.map(({ id, name, subtabs }) => (
-        <li key={id}>
+        <li key={id} className="list-item">
           <Tab
             id={id}
             name={name}

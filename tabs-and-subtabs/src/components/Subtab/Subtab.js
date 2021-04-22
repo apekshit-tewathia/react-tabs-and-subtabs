@@ -8,7 +8,10 @@ const Subtab = ({ id, active, clickHandler, name, content }) => {
 
   return (
     <>
-      <a className={displayClass} onClick={() => clickHandler(id)}>
+      <a
+        className={`${displayClass} tab-link`}
+        onClick={() => clickHandler(id)}
+      >
         {name}
       </a>
       {active && content}

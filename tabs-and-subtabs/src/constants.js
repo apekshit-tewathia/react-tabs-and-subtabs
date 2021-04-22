@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const headerData = {
   tabs: [
     {
@@ -39,4 +40,3 @@ export const headerData = {
     },
   ],
 }
-export const a = 2

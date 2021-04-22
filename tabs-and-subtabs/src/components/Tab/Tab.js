@@ -19,13 +19,16 @@ const Tab = ({ id, active, clickHandler, name, subtabs }) => {
 
   return (
     <div>
-      <a className={displayClass} onClick={() => clickHandler(id)}>
+      <a
+        className={`${displayClass} tab-link`}
+        onClick={() => clickHandler(id)}
+      >
         {name}
       </a>
-      <ul>
+      <ul className="tab-list">
         {active &&
           subtabs?.map(({ id: subtabId, name: subtabName, content }) => (
-            <li key={subtabId}>
+            <li key={subtabId} className="list-item">
               <Subtab
                 id={subtabId}
                 name={subtabName}
