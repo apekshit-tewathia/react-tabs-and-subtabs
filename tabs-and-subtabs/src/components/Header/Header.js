@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import Tab from '../Tab/Tab'
-import { headerData } from '../../constants'
+import Tab from 'components/Tab/Tab'
+import { headerData } from 'constants.js'
 
 const Header = () => {
   const [activeTab, setactiveTab] = useState(1)
